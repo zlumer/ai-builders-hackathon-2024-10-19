@@ -8,21 +8,15 @@ export default function HiPage()
 {
 	const { data: schemas, error } = useSWR<string[]>('/api/schemas', fetcher)
 
-	if (error)
-		return <div>Failed to load</div>
-
-	if (!schemas)
-		return <div>Loading...</div>
-
 	return (
 		<div className="flex flex-col items-center justify-center min-h-screen py-2">
 			<main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
 				<h1 className="text-6xl font-bold">
 					Hi there!
 				</h1>
-				<p className="mt-3 text-2xl">
-					{schemas.join(', ')}
-				</p>
+				{error
+				? <p className="mt-3 text-2xl">Failed to load</p>
+				: schemas?.map(s => <p className="mt-3 text-2xl">{s}</p>) || "Loading..."}
 			</main>
 		</div>
 	)
