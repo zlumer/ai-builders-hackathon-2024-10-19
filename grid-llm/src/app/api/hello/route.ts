@@ -1,24 +1,15 @@
-import { NextResponse } from 'next/server'
-import { db } from '@/lib/db'
 import { users } from '@/drizzle/schema'
+import { db } from '@/lib/db'
+import { swallowTo500 } from '@/utils/next/swallow'
 import { eq } from 'drizzle-orm'
+import { NextResponse } from 'next/server'
 
-export async function GET()
+export const GET = swallowTo500(async () =>
 {
-	try
-	{
-		const user = await db.select().from(users).where(eq(users.id, "1"))
+	const user = await db.select().from(users).where(eq(users.id, "1"))
 
-		if (user)
-		{
-			return NextResponse.json({ user })
-		} else
-		{
-			return NextResponse.json({ message: 'User not found' }, { status: 404 })
-		}
-	} catch (error)
-	{
-		console.error('Error fetching user:', error)
-		return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 })
-	}
-}
+	if (user)
+		return NextResponse.json({ user })
+
+	return NextResponse.json({ message: 'User not found' }, { status: 404 })
+})
