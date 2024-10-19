@@ -1,6 +1,15 @@
 import Image from "next/image";
+import Select from "../components/Select";
+import { useState } from "react";
 
 export default function Home() {
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const options = [
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
+  ];
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -22,6 +31,18 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
+
+        <div className="w-full max-w-xs">
+          <Select
+            label="Choose an option"
+            options={options}
+            value={selectedOption}
+            onChange={(e) => setSelectedOption(e.target.value)}
+          />
+          {selectedOption && (
+            <p className="mt-2 text-sm">You selected: {selectedOption}</p>
+          )}
+        </div>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
