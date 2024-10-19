@@ -14,6 +14,9 @@ export function endpoint<Response>(handler: (req: NextApiRequest) => Response | 
 	{
 		try
 		{
+			if (!req.query)
+				req.query = Object.fromEntries(new URLSearchParams(URL.parse(req.url + "")?.searchParams))
+			
 			const response = await handler(req)
 			if ((response instanceof NextResponse) || (response instanceof Response))
 				return response
