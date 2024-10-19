@@ -4,7 +4,8 @@
   "description": "Your project description",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "psql": "docker run --rm -it --network=teable-standalone-network postgres:15.4 psql postgresql://example:example2password@teable-db:5432/example",
+	"sqlchat": "docker run --rm -it --env-file .sqlchat.env -p 3123:3000 sqlchat/sqlchat"
   },
   "dependencies": {
     "ai": "^3.4.16"
