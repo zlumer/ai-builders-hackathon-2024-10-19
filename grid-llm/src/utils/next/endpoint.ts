@@ -1,5 +1,6 @@
 import { NextApiHandler, NextApiRequest } from "next"
 import { NextResponse } from "next/server"
+import { randomUUID } from "crypto"
 
 /**
  * This method wraps an endpoint so that we can either:
@@ -24,8 +25,9 @@ export function endpoint(handler: (req: NextApiRequest) => unknown): NextApiHand
 			if ((error instanceof Response) || (error instanceof NextResponse))
 				return error
 
-			console.error('Error:', error)
-			return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 })
+			const uuid = randomUUID()
+			console.error(`Error[${uuid}]:`, error)
+			return NextResponse.json({ message: 'Internal Server Error', uuid }, { status: 500 })
 		}
 	}
 }
