@@ -2,7 +2,7 @@
 
 import useSWR from 'swr'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 export default function HiPage()
 {
@@ -10,7 +10,7 @@ export default function HiPage()
 
 	if (error)
 		return <div>Failed to load</div>
-		
+
 	if (!schemas)
 		return <div>Loading...</div>
 
