@@ -37,7 +37,7 @@ export async const GET = swallowTo500(async () =>
 })
 ```
 */
-export function swallowTo500(fn: () => any)
+export function swallowTo500(fn: () => Promise<NextResponse>)
 {
 	return async () =>
 	{
