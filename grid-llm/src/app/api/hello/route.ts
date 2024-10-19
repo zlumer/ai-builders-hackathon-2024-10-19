@@ -1,10 +1,10 @@
 import { users } from '@/drizzle/schema'
 import { db } from '@/lib/db'
-import { swallowTo500 } from '@/utils/next/swallow'
+import { endpoint } from '@/utils/next/endpoint'
 import { eq } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 
-export const GET = swallowTo500(async () =>
+export const GET = endpoint(async () =>
 {
 	const user = await db.select().from(users).where(eq(users.id, "1"))
 
