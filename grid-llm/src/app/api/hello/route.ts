@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
-import { users } from '@/lib/schema'
+import { users } from '@/drizzle/schema'
 import { eq } from 'drizzle-orm'
 
 export async function GET() {
     try {
-        const user = await db.select().from(users).where(eq(users.id, 1)).get()
+        const user = await db.select().from(users).where(eq(users.id, "1"))
 
         if (user) {
             return NextResponse.json({ user })
