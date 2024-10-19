@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server'
 
 export const GET = endpoint(async () =>
 {
-	const user = await db.select().from(users).where(eq(users.id, "1"))
+	const user = await db.select().from(users).limit(1)
 
 	if (user)
 		return NextResponse.json({ user })
