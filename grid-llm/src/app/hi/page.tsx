@@ -11,7 +11,7 @@ export default async function HiPage()
 					Hi there!
 				</h1>
 				<p className="mt-3 text-2xl">
-					Welcome to your new page.
+					{schemas}
 				</p>
 			</main>
 		</div>
