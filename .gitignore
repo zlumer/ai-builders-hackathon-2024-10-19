@@ -1,0 +1,4 @@
+.env
+.aider*
+aider.sh
+scrape.sh
