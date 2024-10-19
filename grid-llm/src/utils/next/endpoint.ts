@@ -7,14 +7,14 @@ import { NextResponse } from "next/server"
  * - throw an error to respond 500 to client
  * - throw a NextResponse with the necessary return type and status code
  */
-export function endpoint(handler: (req: NextApiRequest) => Response | Promise<Response>): NextApiHandler
+export function endpoint(handler: (req: NextApiRequest) => unknown): NextApiHandler
 {
 	return async (req) =>
 	{
 		try
 		{
 			const response = await handler(req)
-			if (response instanceof NextResponse)
+			if ((response instanceof NextResponse) || (response instanceof Response))
 				return response
 
 			return NextResponse.json(response)

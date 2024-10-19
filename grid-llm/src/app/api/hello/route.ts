@@ -8,7 +8,7 @@ export const GET = endpoint(async () =>
 	const user = await db.select().from(users).limit(1)
 
 	if (user)
-		return NextResponse.json({ user })
+		return { user }
 
-	return NextResponse.json({ message: 'User not found' }, { status: 404 })
+	throw NextResponse.json({ message: 'User not found' }, { status: 404 })
 })
