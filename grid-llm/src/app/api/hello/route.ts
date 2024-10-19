@@ -1,7 +1,6 @@
 import { users } from '@/drizzle/schema'
 import { db } from '@/lib/db'
 import { endpoint } from '@/utils/next/endpoint'
-import { eq } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 
 export const GET = endpoint(async () =>
