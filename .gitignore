@@ -5,3 +5,4 @@ scrape.sh
 node_modules/**/*
 *.env
 docker/docker
+docs/test.sql
