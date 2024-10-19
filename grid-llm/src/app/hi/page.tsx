@@ -3,6 +3,8 @@
 import { useNextApi } from '@/utils/next/use-api'
 import TableSelect from './TableSelect'
 import Everything from './everything'
+import CustomSelect from './select'
+import { useState } from 'react'
 
 const dbSchemas = [
 	{ value: 'public', label: 'Public' },
@@ -28,16 +30,21 @@ export default function HiPage()
 {
 	const { data: schemas, error } = useNextApi<string[]>("/api/schemas")
 
+	let [idx, setIdx] = useState(0)
+
 	return (
 		<div className="flex flex-col items-center justify-center min-h-screen py-2">
 			<main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
 				<h1 className="text-6xl font-bold">
 					Hi there!
 				</h1>
-				<Everything
+				{/* <Everything
 					defaultSchema={schemas?.[0]}
 					schemas={schemas}
-				/>
+				/> */}
+
+				{/* multiple selects for test */}
+				<CustomSelect idx={idx} options={columns.map(x => x.label)} onChange={setIdx} />
 				{error
 				? <p className="mt-3 text-2xl">Failed to load</p>
 				: schemas?.map(s => <p className="mt-3 text-2xl">{s}</p>) || "Loading..."}

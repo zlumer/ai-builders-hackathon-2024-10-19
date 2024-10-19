@@ -43,40 +43,7 @@ export default function Everything({
 			<div className="grid grid-cols-2 gap-6">
 				{dbSchemas && <div className="space-y-2">
 					<Label>DB Schema</Label>
-					<Popover>
-						<PopoverTrigger asChild>
-							<Button
-								variant="outline"
-								role="combobox"
-								className="w-full justify-between"
-							>
-								{dbSchema}
-								<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-							</Button>
-						</PopoverTrigger>
-						<PopoverContent className="w-full p-0">
-							<Command>
-								<CommandInput placeholder="Search DB schema..." />
-								<CommandEmpty>No DB schema found.</CommandEmpty>
-								<CommandGroup>
-									{dbSchemas.map((schema) => (
-										<CommandItem
-											key={schema}
-											onSelect={() => setDbSchema(schema)}
-										>
-											<Check
-												className={cn(
-													"mr-2 h-4 w-4",
-													dbSchema === schema ? "opacity-100" : "opacity-0"
-												)}
-											/>
-											{schema}
-										</CommandItem>
-									))}
-								</CommandGroup>
-							</Command>
-						</PopoverContent>
-					</Popover>
+					
 				</div>}
 
 				{tableSchemas && <div className="space-y-2">
