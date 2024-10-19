@@ -6,3 +6,4 @@ node_modules/**/*
 *.env
 docker/docker
 docs/test.sql
+2024-10-19-micro-vc.csv
