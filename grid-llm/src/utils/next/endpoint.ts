@@ -8,7 +8,7 @@ import { randomUUID } from "crypto"
  * - throw an error to respond 500 to client
  * - throw a NextResponse with the necessary return type and status code
  */
-export function endpoint(handler: (req: NextApiRequest) => unknown): NextApiHandler
+export function endpoint<Response>(handler: (req: NextApiRequest) => Response | Promise<Response>): NextApiHandler
 {
 	return async (req) =>
 	{
