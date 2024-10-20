@@ -28,6 +28,11 @@ export default function Everything({
 	const [prompt, setPrompt] = useState("")
 	const [waitingForPrompt, setWaitingForPrompt] = useState(false)
 
+	const [showCandidates, setShowCandidates] = useState<boolean>(false)
+	const [candidates, setCandidates] = useState<number[]>([])
+	const [candidatesFinished, setCandidatesFinished] = useState<number>(0)
+	const [disableRunButton, setDisableRunButton] = useState<boolean>(false)
+
 	const onAiClick = async () =>
 	{
 		setWaitingForPrompt(true)
@@ -50,6 +55,58 @@ export default function Everything({
 		{
 			setWaitingForPrompt(false)
 		}
+	}
+	const onRunClick = async () =>
+	{
+		setDisableRunButton(true)
+		try
+		{
+
+			let result = await fetch('/api/ai/filldb/candidates', {
+				method: 'POST',
+				body: JSON.stringify({
+					inputs: inputColumns.map(i => columns[i]),
+					output: columns[outputColumnIdx],
+				}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			let data = await result.json()
+			setCandidates(data)
+			setCandidatesFinished(0)
+			setShowCandidates(true)
+			setTimeout(processNextCandidate, 100)
+		}
+		catch (e)
+		{
+			setDisableRunButton(false)
+		}
+	}
+	const processNextCandidate = async () =>
+	{
+		console.log(`processing next candidate`)
+		if (candidatesFinished >= candidates.length)
+			return console.log(`no next candidate`), setDisableRunButton(false)
+
+		let next = candidates[candidatesFinished]
+		console.log(`processing candidate ${next}`)
+
+		let result = await fetch('/api/ai/filldb/candidates/process', {
+			method: 'POST',
+			body: JSON.stringify({
+				id: next,
+				inputs: inputColumns.map(i => columns[i]),
+				prompt: prompt,
+				output: columns[outputColumnIdx],
+			}),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+
+		setCandidatesFinished(candidatesFinished + 1)
+		processNextCandidate()
 	}
 
 	return (
@@ -117,7 +174,15 @@ export default function Everything({
 
 			</div>
 
-			<Button className="w-full">Fill DB</Button>
+			<Button className="w-full" disabled={disableRunButton} onClick={onRunClick}>Fill DB</Button>
+			{showCandidates && <div className="space-y-2">
+				<Label>Candidates</Label>
+				<div className="grid grid-cols-2 gap-4">
+					{(candidates.length == candidatesFinished)
+						? <div className="text-sm text-gray-500">Finished! {candidatesFinished} filled</div>
+						: <>{candidatesFinished}/{candidates.length} processed</>}
+				</div>
+			</div>}
 		</div>
 	)
 }

@@ -44,6 +44,6 @@ export const POST = endpoint(async req =>
 			{ role: "user", content: USER_PROMPT("VC Fund information (name, website, investment size, team)", inputs, output) },
 		]
 	})
-	return { prompt: text.text }
+	return { prompt: text.text + "\nReturn the result a single short string, no additional comments." }
 })
 export const GET = POST
