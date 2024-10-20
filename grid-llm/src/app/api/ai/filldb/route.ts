@@ -29,10 +29,8 @@ export const POST = endpoint(async req =>
 			web_search
 		},
 		maxSteps: 10,
-		messages: [
-			{ role: "system", content: prompt },
-			{ role: "user", content: input },
-		]
+		system: prompt,
+		prompt: input,
 	})
 	return { text: text }
 })
