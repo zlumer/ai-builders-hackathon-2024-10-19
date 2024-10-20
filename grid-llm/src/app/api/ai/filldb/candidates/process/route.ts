@@ -21,10 +21,11 @@ const web_search = tool({
 	parameters: z.object({ query: z.string() }),
 	execute: async ({ query }) =>
 	{
-		await sleep(3000)
-		return DDG.search(query, {
+		let result = await DDG.search(query, {
 			safeSearch: DDG.SafeSearchType.OFF
 		}).then(r => r.results)
+		await sleep(3000)
+		return result
 	}
 })
 
