@@ -39,8 +39,8 @@ export default function HiPage()
 					Hi there!
 				</h1> */}
 				<Everything
-					schemas={schemas || []}
-					tables={tableSchemas.map(x => x.label)}
+					// schemas={schemas || []}
+					// tables={tableSchemas.map(x => x.label)}
 					columns={columns.map(x => x.label)}
 				/>
 

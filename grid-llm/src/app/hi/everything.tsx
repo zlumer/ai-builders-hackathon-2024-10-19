@@ -15,17 +15,42 @@ import CustomSelect from './select'
 export default function Everything({
 	...props
 }: {
-	schemas: string[]
-	tables: string[]
+	// schemas: string[]
+	// tables: string[]
 	columns: string[]
 })
 {
-	const { schemas, tables, columns } = props
-	const [schemaIdx, setSchemaIdx] = useState(0)
-	const [tableIdx, setTableIdx] = useState(0)
+	const { /* schemas, tables, */ columns } = props
+	// const [schemaIdx, setSchemaIdx] = useState(0)
+	// const [tableIdx, setTableIdx] = useState(0)
 	const [inputColumns, setInputColumns] = useState<number[]>([])
 	const [outputColumnIdx, setOutputColumnIdx] = useState(0)
 	const [prompt, setPrompt] = useState("")
+	const [waitingForPrompt, setWaitingForPrompt] = useState(false)
+
+	const onAiClick = async () =>
+	{
+		setWaitingForPrompt(true)
+		try
+		{
+			let result = await fetch('/api/ai/promptgen', {
+				method: 'POST',
+				body: JSON.stringify({
+					inputs: inputColumns.map(i => columns[i]),
+					output: columns[outputColumnIdx],
+				}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			let data = await result.json()
+			setPrompt(data.prompt)
+		}
+		finally
+		{
+			setWaitingForPrompt(false)
+		}
+	}
 
 	return (
 		<div className="container mx-auto p-6 space-y-8">
@@ -85,8 +110,9 @@ export default function Everything({
 						value={prompt}
 						onChange={(e) => setPrompt(e.target.value)}
 						className="min-h-[100px]"
+						disabled={waitingForPrompt}
 					/>
-					<Button className="w-75px">AI</Button>
+					<Button disabled={waitingForPrompt} className="w-75px" onClick={onAiClick}>AI</Button>
 				</div>
 
 			</div>
