@@ -1206,6 +1206,14 @@ drizzle-orm@^0.35.2:
   resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.35.2.tgz#79d0857608c526e813e7df46cd2d51324dfc760d"
   integrity sha512-bLQtRchl8QvRo2MyG6kcZC90UDzR7Ubir4YwOHV3cZPdJbF+4jU/Yt0QOczsoXe25wLRt6CtCWLXtSDQKft3yg==
 
+duck-duck-scrape@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/duck-duck-scrape/-/duck-duck-scrape-2.2.5.tgz#a756ef01a7002148daabe17be2436a239a478aa4"
+  integrity sha512-RTu/Ag5LhgD/j1l2zVGCwTINBoEYCffl58nMoBjtXWJG8tTex72h3gxpDjAr8jVqFaBvhgASNKTUsE31JeqYgw==
+  dependencies:
+    html-entities "^2.3.3"
+    needle "^3.2.0"
+
 eastasianwidth@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/eastasianwidth/-/eastasianwidth-0.2.0.tgz#696ce2ec0aa0e6ea93a397ffcf24aa7840c827cb"
@@ -1383,6 +1391,18 @@ hasown@^2.0.2:
   dependencies:
     function-bind "^1.1.2"
 
+html-entities@^2.3.3:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-2.5.2.tgz#201a3cf95d3a15be7099521620d19dfb4f65359f"
+  integrity sha512-K//PSRMQk4FZ78Kyau+mZurHn3FH0Vwr+H36eE0rPbeYkRRi9YxceYPhuN60UwWorxyKHhqoAJl2OFKa4BVtaA==
+
+iconv-lite@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.6.3.tgz#a52f80bf38da1952eb5c681790719871a1a72501"
+  integrity sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==
+  dependencies:
+    safer-buffer ">= 2.1.2 < 3.0.0"
+
 invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
@@ -1544,6 +1564,14 @@ nanoid@^3.3.6, nanoid@^3.3.7:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.7.tgz#d0c301a691bc8d54efa0a2226ccf3fe2fd656bd8"
   integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
+
+needle@^3.2.0:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/needle/-/needle-3.3.1.tgz#63f75aec580c2e77e209f3f324e2cdf3d29bd049"
+  integrity sha512-6k0YULvhpw+RoLNiQCRKOl09Rv1dPLr8hHnVjHqdolKwDrdNyk+Hmrthi4lIGPPz3r39dLx0hsF5s40sZ3Us4Q==
+  dependencies:
+    iconv-lite "^0.6.3"
+    sax "^1.2.4"
 
 next@14.2.15:
   version "14.2.15"
@@ -1919,6 +1947,16 @@ run-parallel@^1.1.9:
   integrity sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
   dependencies:
     queue-microtask "^1.2.2"
+
+"safer-buffer@>= 2.1.2 < 3.0.0":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
+  integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
+
+sax@^1.2.4:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-1.4.1.tgz#44cc8988377f126304d3b3fc1010c733b929ef0f"
+  integrity sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==
 
 scheduler@^0.23.2:
   version "0.23.2"
