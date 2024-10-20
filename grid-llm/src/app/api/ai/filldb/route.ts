@@ -19,7 +19,7 @@ const web_search = tool({
 
 export const POST = endpoint(async req =>
 {
-	let { input, prompt } = req.body
+	let { input, prompt } = req.body || req.query
 	if (!input || !prompt)
 		throw { message: 'Missing inputs or prompt', status: 400 }
 
