@@ -4,9 +4,9 @@ import { generateText, tool } from "ai"
 import * as DDG from "duck-duck-scrape"
 import { z } from "zod"
 
-const openai = createOpenAI({
-	apiKey: process.env.NEBIUS_API_KEY,
-	baseURL: `https://api.studio.nebius.ai/v1`,
+const groq = createOpenAI({
+	apiKey: process.env.GROQ_API_KEY,
+	baseURL: `https://api.groq.com/openai/v1`,
 })
 
 const web_search = tool({
@@ -24,7 +24,7 @@ export const POST = endpoint(async req =>
 		throw { message: 'Missing inputs or prompt', status: 400 }
 
 	let text = await generateText({
-		model: openai("meta-llama/Meta-Llama-3.1-70B-Instruct", { structuredOutputs: true }),
+		model: groq("llama-3.1-70b-versatile", { structuredOutputs: true }),
 		tools: {
 			web_search
 		},
