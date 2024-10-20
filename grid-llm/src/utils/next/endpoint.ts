@@ -2,6 +2,15 @@ import { NextApiHandler, NextApiRequest } from "next"
 import { NextResponse } from "next/server"
 import { randomUUID } from "crypto"
 
+async function streamToString(stream: any)
+{
+	const chunks = []
+	for await (const chunk of stream)
+		chunks.push(chunk)
+
+	return Buffer.concat(chunks).toString('utf8')
+}
+
 /**
  * This method wraps an endpoint so that we can either:
  * - return JSON (or JSON Promise) to respond 200 to client
@@ -16,7 +25,10 @@ export function endpoint<Response>(handler: (req: NextApiRequest) => Response | 
 		{
 			if (!req.query)
 				req.query = Object.fromEntries(new URLSearchParams(URL.parse(req.url + "")?.searchParams))
-			
+
+			if (req.body)
+				req = {...req, body: JSON.parse(await streamToString(req.body))} as NextApiRequest
+
 			const response = await handler(req)
 			if ((response instanceof NextResponse) || (response instanceof Response))
 				return response
