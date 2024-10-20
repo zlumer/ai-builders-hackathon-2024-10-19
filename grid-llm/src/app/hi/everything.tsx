@@ -117,7 +117,7 @@ export default function Everything({
 
 			</div>
 
-			<Button className="w-full">Submit</Button>
+			<Button className="w-full">Fill DB</Button>
 		</div>
 	)
 }
