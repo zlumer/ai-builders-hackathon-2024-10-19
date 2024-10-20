@@ -106,12 +106,12 @@ export default function Everything({
 		})
 
 		setCandidatesFinished(candidatesFinished + 1)
-		processNextCandidate()
+		setTimeout(processNextCandidate, 100)
 	}
 
 	return (
 		<div className="container mx-auto p-6 space-y-8">
-			<h1 className="text-2xl font-bold mb-6">Schema and Prompt Configuration</h1>
+			<h1 className="text-2xl font-bold mb-6">Autofill configuration</h1>
 
 			{/* <div className="grid grid-cols-2 gap-6">
 				{schemas && <div className="space-y-2">

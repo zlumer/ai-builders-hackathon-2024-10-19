@@ -28,13 +28,13 @@ const web_search = tool({
 	}
 })
 
-const GET_CANDIDATE = (inputs: string[], id: number) => sql`
+const GET_CANDIDATE = (inputs: string[], id: number) => `
 SELECT ${inputs.map(s => `"${s}"`).join(', ')}
 FROM "bsecFP0wuTp8G64rseI"."t2024_10_19_micro_vc"
 WHERE id = ${id}
 `
 
-const UPDATE_CANDIDATE = (id: number, output: string, value: string) => sql`
+const UPDATE_CANDIDATE = (id: number, output: string, value: string) => `
 UPDATE "bsecFP0wuTp8G64rseI"."t2024_10_19_micro_vc"
 SET "${output}" = '${value}'
 WHERE id = ${id}

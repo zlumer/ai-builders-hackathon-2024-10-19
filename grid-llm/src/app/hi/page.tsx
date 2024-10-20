@@ -26,24 +26,27 @@ export default function HiPage()
 	let [idx, setIdx] = useState(0)
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen py-2">
-			<main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-				{/* <h1 className="text-6xl font-bold">
+		// <div>
+			/* <iframe src="http://localhost:3000/base/bsecFP0wuTp8G64rseI/tblEWcaH57WidaVd1Zd/viwQbjgVDohIDXVVf7u" width="70wv" /> */
+			<div className="flex flex-col items-center justify-center min-h-screen py-2">
+				<main className="flex flex-col items-center justify-center w-full flex-1 text-center">
+					{/* <h1 className="text-6xl font-bold">
 					Hi there!
-				</h1> */}
-				<Everything
-					// schemas={schemas || []}
-					// tables={tableSchemas.map(x => x.label)}
-					columns={columns.map(x => x.id)}
-				/>
+					</h1> */}
+					<Everything
+						// schemas={schemas || []}
+						// tables={tableSchemas.map(x => x.label)}
+						columns={columns.map(x => x.id)}
+					/>
 
-				{/* multiple selects for test */}
-				{/* <CustomSelect idx={idx} options={columns.map(x => x.label)} onChange={setIdx} /> */}
-				{/* {error
+					{/* multiple selects for test */}
+					{/* <CustomSelect idx={idx} options={columns.map(x => x.label)} onChange={setIdx} /> */}
+					{/* {error
 					? <p className="mt-3 text-2xl">Failed to load</p>
 					: schemas?.map(s => <p className="mt-3 text-2xl">{s}</p>) || "Loading..."} */}
-				{/* {schemas && <TableSelect schema={schemas[0]} />} */}
-			</main>
-		</div>
+					{/* {schemas && <TableSelect schema={schemas[0]} />} */}
+				</main>
+			</div>
+		// </div>
 	)
 }
