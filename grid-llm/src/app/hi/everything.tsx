@@ -10,95 +10,53 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Checkbox } from '@/components/ui/checkbox'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import CustomSelect from './select'
 
 export default function Everything({
-	defaultSchema = '',
-	defaultTable = '',
-	defaultInputColumns = [],
-	defaultOutputColumn = '',
-	defaultPrompt = '',
 	...props
 }: {
-	defaultSchema?: string,
-	defaultTable?: string,
-	defaultInputColumns?: string[],
-	defaultOutputColumn?: string,
-	defaultPrompt?: string,
-	schemas?: string[]
-	tables?: string[]
-	columns?: string[]
+	schemas: string[]
+	tables: string[]
+	columns: string[]
 })
 {
-	const { schemas: dbSchemas, tables: tableSchemas, columns } = props
-	const [dbSchema, setDbSchema] = useState(defaultSchema)
-	const [tableSchema, setTableSchema] = useState(defaultTable)
-	const [inputColumns, setInputColumns] = useState<string[]>(defaultInputColumns)
-	const [outputColumn, setOutputColumn] = useState(defaultOutputColumn)
-	const [prompt, setPrompt] = useState(defaultPrompt)
+	const { schemas, tables, columns } = props
+	const [schemaIdx, setSchemaIdx] = useState(0)
+	const [tableIdx, setTableIdx] = useState(0)
+	const [inputColumns, setInputColumns] = useState<number[]>([])
+	const [outputColumnIdx, setOutputColumnIdx] = useState(0)
+	const [prompt, setPrompt] = useState("")
 
 	return (
 		<div className="container mx-auto p-6 space-y-8">
 			<h1 className="text-2xl font-bold mb-6">Schema and Prompt Configuration</h1>
 
-			<div className="grid grid-cols-2 gap-6">
-				{dbSchemas && <div className="space-y-2">
+			{/* <div className="grid grid-cols-2 gap-6">
+				{schemas && <div className="space-y-2">
 					<Label>DB Schema</Label>
-					
+					<CustomSelect idx={schemaIdx} options={schemas.map(x => x)} onChange={setSchemaIdx} />
 				</div>}
 
-				{tableSchemas && <div className="space-y-2">
+				{tables && <div className="space-y-2">
 					<Label>Table Schema</Label>
-					<Popover>
-						<PopoverTrigger asChild>
-							<Button
-								variant="outline"
-								role="combobox"
-								className="w-full justify-between"
-							>
-								{tableSchema}
-								<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-							</Button>
-						</PopoverTrigger>
-						<PopoverContent className="w-full p-0">
-							<Command>
-								<CommandInput placeholder="Search table schema..." />
-								<CommandEmpty>No table schema found.</CommandEmpty>
-								<CommandGroup>
-									{tableSchemas.map((schema) => (
-										<CommandItem
-											key={schema}
-											onSelect={() => setTableSchema(schema)}
-										>
-											<Check
-												className={cn(
-													"mr-2 h-4 w-4",
-													tableSchema === schema ? "opacity-100" : "opacity-0"
-												)}
-											/>
-											{schema}
-										</CommandItem>
-									))}
-								</CommandGroup>
-							</Command>
-						</PopoverContent>
-					</Popover>
+					<CustomSelect idx={0} options={tables.map(x => x)} onChange={setTableIdx} />
 				</div>}
-			</div>
+			</div> */}
 
 			{columns && <div className="space-y-2">
 				<Label>Input Columns</Label>
 				<div className="grid grid-cols-2 gap-4">
-					{columns.map((column) => (
+					{columns.map((column, i) => (
 						<div key={column} className="flex items-center space-x-2">
 							<Checkbox
-								id={column}
-								checked={inputColumns.includes(column)}
+								id={i + ""}
+								checked={inputColumns.includes(i)}
 								onCheckedChange={(checked) =>
 								{
 									setInputColumns(
 										checked
-											? [...inputColumns, column]
-											: inputColumns.filter((id) => id !== column)
+											? [...inputColumns, i]
+											: inputColumns.filter((id) => id !== i)
 									)
 								}}
 							/>
@@ -115,51 +73,22 @@ export default function Everything({
 
 			{columns && <div className="space-y-2">
 				<Label>Output Column</Label>
-				<Popover>
-					<PopoverTrigger asChild>
-						<Button
-							variant="outline"
-							role="combobox"
-							className="w-full justify-between"
-						>
-							{outputColumn}
-							<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-						</Button>
-					</PopoverTrigger>
-					<PopoverContent className="w-full p-0">
-						<Command>
-							<CommandInput placeholder="Search output column..." />
-							<CommandEmpty>No column found.</CommandEmpty>
-							<CommandGroup>
-								{columns.map((column) => (
-									<CommandItem
-										key={column}
-										onSelect={() => setOutputColumn(column)}
-									>
-										<Check
-											className={cn(
-												"mr-2 h-4 w-4",
-												outputColumn === column ? "opacity-100" : "opacity-0"
-											)}
-										/>
-										{column}
-									</CommandItem>
-								))}
-							</CommandGroup>
-						</Command>
-					</PopoverContent>
-				</Popover>
+				<CustomSelect idx={outputColumnIdx} options={columns.map(x => x)} onChange={setOutputColumnIdx} />
 			</div>}
 
 			<div className="space-y-2">
 				<Label htmlFor="prompt">Prompt</Label>
-				<Textarea
-					id="prompt"
-					placeholder="Enter your prompt here..."
-					value={prompt}
-					onChange={(e) => setPrompt(e.target.value)}
-					className="min-h-[100px]"
-				/>
+				<div className='flex gap-5'>
+					<Textarea
+						id="prompt"
+						placeholder="Enter your prompt here..."
+						value={prompt}
+						onChange={(e) => setPrompt(e.target.value)}
+						className="min-h-[100px]"
+					/>
+					<Button className="w-75px">AI</Button>
+				</div>
+
 			</div>
 
 			<Button className="w-full">Submit</Button>

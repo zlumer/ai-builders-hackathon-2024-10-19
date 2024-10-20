@@ -35,16 +35,17 @@ export default function HiPage()
 	return (
 		<div className="flex flex-col items-center justify-center min-h-screen py-2">
 			<main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-				<h1 className="text-6xl font-bold">
+				{/* <h1 className="text-6xl font-bold">
 					Hi there!
-				</h1>
-				{/* <Everything
-					defaultSchema={schemas?.[0]}
-					schemas={schemas}
-				/> */}
+				</h1> */}
+				<Everything
+					schemas={schemas || []}
+					tables={tableSchemas.map(x => x.label)}
+					columns={columns.map(x => x.label)}
+				/>
 
 				{/* multiple selects for test */}
-				<CustomSelect idx={idx} options={columns.map(x => x.label)} onChange={setIdx} />
+				{/* <CustomSelect idx={idx} options={columns.map(x => x.label)} onChange={setIdx} /> */}
 				{error
 				? <p className="mt-3 text-2xl">Failed to load</p>
 				: schemas?.map(s => <p className="mt-3 text-2xl">{s}</p>) || "Loading..."}
